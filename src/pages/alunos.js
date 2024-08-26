@@ -7,11 +7,11 @@ function Alunos() {
   const [turmas, setTurmas] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/alunos')
+    axios.get('http://168.138.148.174:8080/alunos')
       .then(response => setAlunos(response.data))
       .catch(error => console.log(error));
 
-    axios.get('http://localhost:8080/turmas')
+    axios.get('http://168.138.148.174:8080/turmas')
       .then(response => setTurmas(response.data))
       .catch(error => console.log(error));
   }, []);
@@ -27,7 +27,7 @@ function Alunos() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8080/alunos', novoAluno)
+    axios.post('http://168.138.148.174:8080/alunos', novoAluno)
       .then(response => {
         setAlunos([...alunos, response.data]);
         setNovoAluno({ nome: '', matricula: '', turmas: [] });
