@@ -11,12 +11,18 @@ function Professores() {
 
   useEffect(() => {
     axios
-      .get("https://front-end-frame-work-react-back-end-golang.vercel.app/professores")
-      .then(response => {
-        console.log(response.data);  // Adicione isso
-        setProfessores(response.data);
+      .get(
+        "https://front-end-frame-work-react-back-end-golang.vercel.app/professores"
+      )
+      .then((response) => {
+        console.log("Dados recebidos:", response.data); // Adicione isso
+        if (Array.isArray(response.data)) {
+          setProfessores(response.data);
+        } else {
+          console.error("Os dados recebidos não são um array:", response.data);
+        }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log("Erro ao buscar professores:", error));
   }, []);
 
   const handleChange = (e) => {
@@ -27,7 +33,10 @@ function Professores() {
     e.preventDefault();
     console.log("Submitting the form");
     axios
-      .post("https://front-end-frame-work-react-back-end-golang.vercel.app/professores", novoProfessor)
+      .post(
+        "https://front-end-frame-work-react-back-end-golang.vercel.app/professores",
+        novoProfessor
+      )
       .then((response) => {
         setProfessores([...professores, response.data]);
         setNovoProfessor({ nome: "", email: "", cpf: "" });
@@ -40,11 +49,16 @@ function Professores() {
     <div className="container">
       <div className="jumbotron bg-primary text-white p-5 rounded-lg shadow-sm mb-4">
         <h2 className="display-4">Gerenciamento de Professores</h2>
-        <p className="lead">Cadastre novos professores e visualize a lista completa dos docentes.</p>
+        <p className="lead">
+          Cadastre novos professores e visualize a lista completa dos docentes.
+        </p>
       </div>
 
       <h3 className="mb-4">Cadastrar Novo Professor</h3>
-      <form onSubmit={handleSubmit} className="mb-4 p-4 bg-light rounded-lg shadow">
+      <form
+        onSubmit={handleSubmit}
+        className="mb-4 p-4 bg-light rounded-lg shadow"
+      >
         <div className="mb-3">
           <label htmlFor="nome" className="form-label">
             Nome
@@ -97,21 +111,25 @@ function Professores() {
 
       <h3 className="mb-4">Lista de Professores</h3>
       <div className="row">
-        {professores.map((professor) => (
-          <div key={professor.ID} className="col-md-4">
-            <div className="card mb-4 border-0 shadow">
-              <div className="card-body">
-                <h5 className="card-title text-primary">{professor.Nome}</h5>
-                <p className="card-text">
-                  <strong>Email:</strong> {professor.Email}
-                </p>
-                <p className="card-text">
-                  <strong>CPF:</strong> {professor.CPF}
-                </p>
+        {professores.length > 0 ? (
+          professores.map((professor) => (
+            <div key={professor.ID} className="col-md-4">
+              <div className="card mb-4 border-0 shadow">
+                <div className="card-body">
+                  <h5 className="card-title text-primary">{professor.Nome}</h5>
+                  <p className="card-text">
+                    <strong>Email:</strong> {professor.Email}
+                  </p>
+                  <p className="card-text">
+                    <strong>CPF:</strong> {professor.CPF}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center">Nenhum professor encontrado.</p>
+        )}
       </div>
     </div>
   );
