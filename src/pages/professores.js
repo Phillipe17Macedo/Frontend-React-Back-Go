@@ -11,18 +11,16 @@ function Professores() {
 
   useEffect(() => {
     axios
-      .get(
-        "https://front-end-frame-work-react-back-end-golang.vercel.app/professores"
-      )
-      .then((response) => {
-        console.log("Dados recebidos:", response.data); // Adicione isso
-        if (Array.isArray(response.data)) {
-          setProfessores(response.data);
-        } else {
-          console.error("Os dados recebidos não são um array:", response.data);
-        }
-      })
-      .catch((error) => console.log("Erro ao buscar professores:", error));
+    .get("http://64.181.160.179:8080/professores")  // Use a URL direta do backend
+    .then(response => {
+      console.log("Dados recebidos:", response.data);
+      if (Array.isArray(response.data)) {
+        setProfessores(response.data);
+      } else {
+        console.error("Os dados recebidos não são um array:", response.data);
+      }
+    })
+    .catch((error) => console.log("Erro ao buscar professores:", error));  
   }, []);
 
   const handleChange = (e) => {
@@ -34,7 +32,7 @@ function Professores() {
     console.log("Submitting the form");
     axios
       .post(
-        "https://front-end-frame-work-react-back-end-golang.vercel.app/professores",
+        "http://64.181.160.179:8080/professores",
         novoProfessor
       )
       .then((response) => {
