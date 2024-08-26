@@ -12,7 +12,10 @@ function Professores() {
   useEffect(() => {
     axios
       .get("https://front-end-frame-work-react-back-end-golang.vercel.app/professores")
-      .then((response) => setProfessores(response.data))
+      .then(response => {
+        console.log(response.data);  // Adicione isso
+        setProfessores(response.data);
+      })
       .catch((error) => console.log(error));
   }, []);
 
@@ -28,6 +31,7 @@ function Professores() {
       .then((response) => {
         setProfessores([...professores, response.data]);
         setNovoProfessor({ nome: "", email: "", cpf: "" });
+        console.log(response.data);
       })
       .catch((error) => console.log(error));
   };
