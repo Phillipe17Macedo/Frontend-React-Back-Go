@@ -11,7 +11,7 @@ function Professores() {
 
   useEffect(() => {
     axios
-      .get("http://168.138.148.174:8080/professores")
+      .get("http://64.181.160.179:8080/professores")
       .then((response) => setProfessores(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -24,7 +24,7 @@ function Professores() {
     e.preventDefault();
     console.log("Submitting the form");
     axios
-      .post("http://168.138.148.174:8080/professores", novoProfessor)
+      .post("http://64.181.160.179:8080/professores", novoProfessor)
       .then((response) => {
         setProfessores([...professores, response.data]);
         setNovoProfessor({ nome: "", email: "", cpf: "" });

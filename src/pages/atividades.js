@@ -13,12 +13,12 @@ function Atividades() {
 
   useEffect(() => {
     axios
-      .get("http://168.138.148.174:8080/atividades")
+      .get("http://64.181.160.179:8080/atividades")
       .then((response) => setAtividades(response.data))
       .catch((error) => console.log(error));
 
     axios
-      .get("http://168.138.148.174:8080/turmas")
+      .get("http://64.181.160.179:8080/turmas")
       .then((response) => setTurmas(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -38,7 +38,7 @@ function Atividades() {
     };
 
     axios
-      .post("http://168.138.148.174:8080/atividades", atividadeData)
+      .post("http://64.181.160.179:8080/atividades", atividadeData)
       .then((response) => {
         setAtividades([...atividades, response.data]);
         setNovaAtividade({ nome: "", valor: "", data: "", turmaID: "" });
