@@ -7,11 +7,11 @@ function Alunos() {
   const [turmas, setTurmas] = useState([]);
 
   useEffect(() => {
-    axios.get('http://64.181.160.179:8080/alunos')
+    axios.get('https://front-end-frame-work-react-back-end-golang.vercel.app/alunos')
       .then(response => setAlunos(response.data))
       .catch(error => console.log(error));
 
-    axios.get('http://64.181.160.179:8080/turmas')
+    axios.get('https://front-end-frame-work-react-back-end-golang.vercel.app/turmas')
       .then(response => setTurmas(response.data))
       .catch(error => console.log(error));
   }, []);
@@ -27,7 +27,7 @@ function Alunos() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://64.181.160.179:8080/alunos', novoAluno)
+    axios.post('https://front-end-frame-work-react-back-end-golang.vercel.app/alunos', novoAluno)
       .then(response => {
         setAlunos([...alunos, response.data]);
         setNovoAluno({ nome: '', matricula: '', turmas: [] });

@@ -16,7 +16,7 @@ function Notas() {
 
   useEffect(() => {
     axios
-      .get("http://64.181.160.179:8080/notas")
+      .get("https://front-end-frame-work-react-back-end-golang.vercel.app/notas")
       .then((response) => {
         console.log("Dados das notas recebidos:", response.data); 
         setNotas(response.data);
@@ -29,12 +29,12 @@ function Notas() {
     setSelectedTurma(turmaID);
 
     axios
-      .get(`http://64.181.160.179:8080/atividades?turma_id=${turmaID}`)
+      .get(`https://front-end-frame-work-react-back-end-golang.vercel.app/atividades?turma_id=${turmaID}`)
       .then((response) => setAtividades(response.data))
       .catch((error) => console.log(error));
 
     axios
-      .get(`http://64.181.160.179:8080/alunos?turma_id=${turmaID}`)
+      .get(`https://front-end-frame-work-react-back-end-golang.vercel.app/alunos?turma_id=${turmaID}`)
       .then((response) => setAlunos(response.data))
       .catch((error) => console.log(error));
   };
@@ -54,7 +54,7 @@ function Notas() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://64.181.160.179:8080/notas", notaInput)
+      .post("https://front-end-frame-work-react-back-end-golang.vercel.app/notas", notaInput)
       .then((response) => {
         setNotas([...notas, response.data]);
         setNotaInput({ valor: "", alunoID: "", atividadeID: "" });

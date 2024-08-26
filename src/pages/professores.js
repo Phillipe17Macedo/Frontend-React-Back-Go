@@ -11,7 +11,7 @@ function Professores() {
 
   useEffect(() => {
     axios
-      .get("http://64.181.160.179:8080/professores")
+      .get("https://front-end-frame-work-react-back-end-golang.vercel.app/professores")
       .then((response) => setProfessores(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -24,7 +24,7 @@ function Professores() {
     e.preventDefault();
     console.log("Submitting the form");
     axios
-      .post("http://64.181.160.179:8080/professores", novoProfessor)
+      .post("https://front-end-frame-work-react-back-end-golang.vercel.app/professores", novoProfessor)
       .then((response) => {
         setProfessores([...professores, response.data]);
         setNovoProfessor({ nome: "", email: "", cpf: "" });

@@ -6,7 +6,7 @@ function Turmas() {
   const [novaTurma, setNovaTurma] = useState({ nome: '', semestre: '', ano: '', professorID: '' });
 
   useEffect(() => {
-    axios.get('http://64.181.160.179:8080/turmas')
+    axios.get('https://front-end-frame-work-react-back-end-golang.vercel.app/turmas')
       .then(response => setTurmas(response.data))
       .catch(error => console.log(error));
   }, []);
@@ -25,7 +25,7 @@ function Turmas() {
       professorID: parseInt(novaTurma.professorID, 10)
     };
 
-    axios.post('http://64.181.160.179:8080/turmas', turmaData)
+    axios.post('https://front-end-frame-work-react-back-end-golang.vercel.app/turmas', turmaData)
       .then(response => {
         setTurmas([...turmas, response.data]);
         setNovaTurma({ nome: '', semestre: '', ano: '', professorID: '' });
