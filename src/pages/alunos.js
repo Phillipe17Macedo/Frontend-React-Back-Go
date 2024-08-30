@@ -54,11 +54,16 @@ function Alunos() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
+      console.log({
+        ...novoAluno,
+        turmas: [novoAluno.turma],
+      });
       axios.post('https://cadastro-escola-production.up.railway.app/alunos', {
         ...novoAluno,
         turmas: [novoAluno.turma],  // Enviando a turma como um array
       })
       .then(response => {
+        console.log(response.data);
         setAlunos([...alunos, response.data]);
         setNovoAluno({ nome: '', matricula: '', turma: '' });
         setErrors({});
