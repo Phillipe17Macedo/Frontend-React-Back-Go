@@ -53,7 +53,7 @@ function Professores() {
     e.preventDefault();
     if (validate()) {
       axios
-        .post("http://cadastro-escola-production.up.railway.app/professores", novoProfessor)
+        .post("https://cadastro-escola-production.up.railway.app/professores", novoProfessor)
         .then((response) => {
           setProfessores([...professores, response.data]);
           setNovoProfessor({ nome: "", email: "", cpf: "" });
@@ -66,7 +66,7 @@ function Professores() {
   const handleSave = () => {
     if (validate()) {
       axios
-        .put(`http://cadastro-escola-production.up.railway.app/professores/${editingProfessorId}`, novoProfessor)
+        .put(`https://cadastro-escola-production.up.railway.app/professores/${editingProfessorId}`, novoProfessor)
         .then((response) => {
           setProfessores(
             professores.map((prof) =>
@@ -85,7 +85,7 @@ function Professores() {
   const handleDelete = (id) => {
     if (window.confirm("Você tem certeza que deseja remover este professor?")) {
       axios
-        .delete(`http://cadastro-escola-production.up.railway.app/professores/${id}`)
+        .delete(`https://cadastro-escola-production.up.railway.app/professores/${id}`)
         .then(() => {
           setProfessores(
             professores.filter((professor) => professor.ID !== id)
