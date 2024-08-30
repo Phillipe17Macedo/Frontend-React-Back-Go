@@ -54,33 +54,39 @@ function Alunos() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      axios.post('https://cadastro-escola-production.up.railway.app/alunos', novoAluno)
-        .then(response => {
-          setAlunos([...alunos, response.data]);
-          setNovoAluno({ nome: '', matricula: '', turma: '' });
-          setErrors({});
-          alert("Aluno cadastrado com sucesso!");
-        })
-        .catch(error => console.log(error));
+      axios.post('https://cadastro-escola-production.up.railway.app/alunos', {
+        ...novoAluno,
+        turmas: [novoAluno.turma],  // Enviando a turma como um array
+      })
+      .then(response => {
+        setAlunos([...alunos, response.data]);
+        setNovoAluno({ nome: '', matricula: '', turma: '' });
+        setErrors({});
+        alert("Aluno cadastrado com sucesso!");
+      })
+      .catch(error => console.log(error));
     }
-  };
+  };  
 
   const handleSave = () => {
     if (validate()) {
-      axios.put(`https://cadastro-escola-production.up.railway.app/alunos/${editingAlunoId}`, novoAluno)
-        .then((response) => {
-          setAlunos(alunos.map((aluno) =>
-            aluno.ID === editingAlunoId ? response.data : aluno
-          ));
-          setNovoAluno({ nome: '', matricula: '', turma: '' });
-          setEditingAlunoId(null);
-          setEditMode(false);
-          setErrors({});
-          alert("Dados do aluno atualizados com sucesso!");
-        })
-        .catch(error => console.log(error));
+      axios.put(`https://cadastro-escola-production.up.railway.app/alunos/${editingAlunoId}`, {
+        ...novoAluno,
+        turmas: [novoAluno.turma],  // Enviando a turma como um array
+      })
+      .then((response) => {
+        setAlunos(alunos.map((aluno) =>
+          aluno.ID === editingAlunoId ? response.data : aluno
+        ));
+        setNovoAluno({ nome: '', matricula: '', turma: '' });
+        setEditingAlunoId(null);
+        setEditMode(false);
+        setErrors({});
+        alert("Dados do aluno atualizados com sucesso!");
+      })
+      .catch(error => console.log(error));
     }
-  };
+  };  
 
   const handleDelete = (id) => {
     if (window.confirm("Você tem certeza que deseja remover este aluno?")) {
