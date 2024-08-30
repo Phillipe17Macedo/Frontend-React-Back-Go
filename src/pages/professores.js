@@ -14,7 +14,7 @@ function Professores() {
 
   useEffect(() => {
     axios
-      .get("http://cadastro-escola-production.up.railway.app/professores")
+      .get("https://cadastro-escola-production.up.railway.app/professores")
       .then((response) => setProfessores(response.data))
       .catch((error) => console.log(error));
   }, []);

@@ -10,11 +10,11 @@ function Turmas() {
   const [errors, setErrors] = useState({}); // Estado para armazenar erros de validação
 
   useEffect(() => {
-    axios.get('http://localhost:8080/turmas')
+    axios.get('https://cadastro-escola-production.up.railway.app/turmas')
       .then(response => setTurmas(response.data))
       .catch(error => console.log(error));
 
-    axios.get('http://localhost:8080/professores') // Busca os professores
+    axios.get('https://cadastro-escola-production.up.railway.app/professores') // Busca os professores
       .then(response => setProfessores(response.data))
       .catch(error => console.log(error));
   }, []);
@@ -54,7 +54,7 @@ function Turmas() {
       professorID: parseInt(novaTurma.professorID, 10)
     };
 
-    axios.post('http://localhost:8080/turmas', turmaData)
+    axios.post('https://cadastro-escola-production.up.railway.app/turmas', turmaData)
       .then(response => {
         setTurmas([...turmas, response.data]);
         setNovaTurma({ nome: '', semestre: '', ano: '', professorID: '' });
@@ -72,7 +72,7 @@ function Turmas() {
       professorID: parseInt(novaTurma.professorID, 10)
     };
 
-    axios.put(`http://localhost:8080/turmas/${editingTurmaId}`, turmaData)
+    axios.put(`https://cadastro-escola-production.up.railway.app/turmas/${editingTurmaId}`, turmaData)
       .then(response => {
         setTurmas(
           turmas.map(turma =>
@@ -100,7 +100,7 @@ function Turmas() {
 
   const handleDelete = (id) => {
     if (window.confirm("Você tem certeza que deseja remover esta turma?")) {
-      axios.delete(`http://localhost:8080/turmas/${id}`)
+      axios.delete(`https://cadastro-escola-production.up.railway.app/turmas/${id}`)
         .then(() => {
           setTurmas(turmas.filter(turma => turma.ID !== id));
         })

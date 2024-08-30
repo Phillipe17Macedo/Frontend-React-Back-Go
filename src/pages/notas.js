@@ -18,12 +18,12 @@ function Notas() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/notas")
+      .get("https://cadastro-escola-production.up.railway.app/notas")
       .then((response) => setNotas(response.data))
       .catch((error) => console.log("Erro ao buscar notas:", error));
 
     axios
-      .get("http://localhost:8080/turmas")
+      .get("https://cadastro-escola-production.up.railway.app/turmas")
       .then((response) => setTurmas(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -33,12 +33,12 @@ function Notas() {
     setSelectedTurma(turmaID);
 
     axios
-      .get(`http://localhost:8080/atividades?turma_id=${turmaID}`)
+      .get(`https://cadastro-escola-production.up.railway.app/atividades?turma_id=${turmaID}`)
       .then((response) => setAtividades(response.data))
       .catch((error) => console.log(error));
 
     axios
-      .get(`http://localhost:8080/alunos?turma_id=${turmaID}`)
+      .get(`https://cadastro-escola-production.up.railway.app/alunos?turma_id=${turmaID}`)
       .then((response) => setAlunos(response.data))
       .catch((error) => console.log(error));
   };
@@ -89,7 +89,7 @@ function Notas() {
 
     if (editMode) {
       axios
-        .put(`http://localhost:8080/notas/${editingNotaId}`, { valor: notaInput.valor })
+        .put(`https://cadastro-escola-production.up.railway.app/notas/${editingNotaId}`, { valor: notaInput.valor })
         .then((response) => {
           setNotas(
             notas.map((nota) => (nota.ID === editingNotaId ? response.data : nota))
@@ -111,7 +111,7 @@ function Notas() {
         });
     } else {
       axios
-        .post("http://localhost:8080/notas", notaInput)
+        .post("https://cadastro-escola-production.up.railway.app/notas", notaInput)
         .then((response) => {
           setNotas([...notas, response.data]);
           setNotaInput({ valor: "", alunoID: "", atividadeID: "" });
@@ -138,7 +138,7 @@ function Notas() {
     setSelectedTurma(turmaRelacionada.ID);
   
     axios
-      .get(`http://localhost:8080/atividades?turma_id=${turmaRelacionada.ID}`)
+      .get(`https://cadastro-escola-production.up.railway.app/atividades?turma_id=${turmaRelacionada.ID}`)
       .then((response) => {
         setAtividades(response.data);
         setNotaInput({
@@ -150,7 +150,7 @@ function Notas() {
       .catch((error) => console.log(error));
   
     axios
-      .get(`http://localhost:8080/alunos?turma_id=${turmaRelacionada.ID}`)
+      .get(`https://cadastro-escola-production.up.railway.app/alunos?turma_id=${turmaRelacionada.ID}`)
       .then((response) => {
         setAlunos(response.data);
         setEditingNotaId(id);
@@ -162,7 +162,7 @@ function Notas() {
   const handleDelete = (id) => {
     if (window.confirm("Você tem certeza que deseja remover esta nota?")) {
       axios
-        .delete(`http://localhost:8080/notas/${id}`)
+        .delete(`https://cadastro-escola-production.up.railway.app/notas/${id}`)
         .then(() => {
           setNotas(notas.filter((nota) => nota.ID !== id));
         })

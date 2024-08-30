@@ -16,12 +16,12 @@ function Atividades() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/atividades")
+      .get("https://cadastro-escola-production.up.railway.app/atividades")
       .then((response) => setAtividades(response.data))
       .catch((error) => console.log(error));
 
     axios
-      .get("http://localhost:8080/turmas")
+      .get("https://cadastro-escola-production.up.railway.app/turmas")
       .then((response) => setTurmas(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -75,7 +75,7 @@ function Atividades() {
 
     if (editMode) {
       axios
-        .put(`http://localhost:8080/atividades/${editingAtividadeId}`, atividadeData)
+        .put(`https://cadastro-escola-production.up.railway.app/atividades/${editingAtividadeId}`, atividadeData)
         .then((response) => {
           setAtividades(
             atividades.map((atividade) =>
@@ -90,7 +90,7 @@ function Atividades() {
         .catch((error) => console.log(error));
     } else {
       axios
-        .post("http://localhost:8080/atividades", atividadeData)
+        .post("https://cadastro-escola-production.up.railway.app/atividades", atividadeData)
         .then((response) => {
           setAtividades([...atividades, response.data]);
           setNovaAtividade({ nome: "", valor: "", data: "", turmaID: "" });
@@ -119,7 +119,7 @@ function Atividades() {
   const handleDelete = (id) => {
     if (window.confirm("Você tem certeza que deseja remover esta atividade?")) {
       axios
-        .delete(`http://localhost:8080/atividades/${id}`)
+        .delete(`https://cadastro-escola-production.up.railway.app/atividades/${id}`)
         .then(() => {
           setAtividades(atividades.filter((atividade) => atividade.ID !== id));
         })

@@ -10,11 +10,11 @@ function Alunos() {
   const [editingAlunoId, setEditingAlunoId] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/alunos')
+    axios.get('https://cadastro-escola-production.up.railway.app/alunos')
       .then(response => setAlunos(response.data))
       .catch(error => console.log(error));
 
-    axios.get('http://localhost:8080/turmas')
+    axios.get('https://cadastro-escola-production.up.railway.app/turmas')
       .then(response => setTurmas(response.data))
       .catch(error => console.log(error));
   }, []);
@@ -54,7 +54,7 @@ function Alunos() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      axios.post('http://localhost:8080/alunos', novoAluno)
+      axios.post('https://cadastro-escola-production.up.railway.app/alunos', novoAluno)
         .then(response => {
           setAlunos([...alunos, response.data]);
           setNovoAluno({ nome: '', matricula: '', turma: '' });
@@ -67,7 +67,7 @@ function Alunos() {
 
   const handleSave = () => {
     if (validate()) {
-      axios.put(`http://localhost:8080/alunos/${editingAlunoId}`, novoAluno)
+      axios.put(`https://cadastro-escola-production.up.railway.app/alunos/${editingAlunoId}`, novoAluno)
         .then((response) => {
           setAlunos(alunos.map((aluno) =>
             aluno.ID === editingAlunoId ? response.data : aluno
@@ -84,7 +84,7 @@ function Alunos() {
 
   const handleDelete = (id) => {
     if (window.confirm("Você tem certeza que deseja remover este aluno?")) {
-      axios.delete(`http://localhost:8080/alunos/${id}`)
+      axios.delete(`https://cadastro-escola-production.up.railway.app/alunos/${id}`)
         .then(() => {
           setAlunos(alunos.filter(aluno => aluno.ID !== id));
           alert("Aluno removido com sucesso!");
