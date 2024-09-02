@@ -85,13 +85,21 @@ function Professores() {
   const handleDelete = (id) => {
     if (window.confirm("Você tem certeza que deseja remover este professor?")) {
       axios
-        .delete(`https://cadastro-escola-production.up.railway.app/professores/${id}`)
+        .delete(
+          `https://cadastro-escola-production.up.railway.app/professores/${id}`
+        )
         .then(() => {
           setProfessores(
             professores.filter((professor) => professor.ID !== id)
           );
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.error(error);
+          alert(
+            "Erro ao remover o professor: " +
+              (error.response?.data?.error || "Erro desconhecido")
+          );
+        });
     }
   };
 
