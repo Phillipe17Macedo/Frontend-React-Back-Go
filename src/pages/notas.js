@@ -47,13 +47,13 @@ function Notas() {
     const { name, value } = e.target;
   
     if (name === 'valor') {
-      setNotaInput({ ...notaInput, [name]: parseFloat(value) });
+      setNotaInput({ ...notaInput, [name]: value ? parseFloat(value) : "" });
     } else if (name === 'alunoID' || name === 'atividadeID') {
       setNotaInput({ ...notaInput, [name]: parseInt(value, 10) });
     } else {
       setNotaInput({ ...notaInput, [name]: value });
     }
-  };
+  };  
 
   const validateForm = () => {
     let errors = [];
